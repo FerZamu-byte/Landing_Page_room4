@@ -1,0 +1,92 @@
+/* ══════════════════════════════════════════════════════
+   FIKA SPORT — CSS
+   Sitio web de tienda deportiva con diseño neón cyberpunk
+══════════════════════════════════════════════════════ */
+
+
+
+
+/* ══════════════════════════════════════════════════════
+   VARIABLES CSS (Personalizacion inicial)
+══════════════════════════════════════════════════════ */
+:root {
+  /*Colores base*/
+  --bg:        #0a0a0a;        /* Fondo principal*/
+  --bg2:       #111111;        
+  --bg3:       #161616;        /* Fondo de cards y elementos */
+  --border:    rgba(255,255,255,.08); /* Bordes */
+  --text:      #f0f0f0;        /* Texto principal */
+  --text-muted:#888;          
+  /*Colores alertas y elementos complementarios*/
+  --accent:    #c8f000;        
+  --accent2:   #00f0c8;       
+  --danger:    #ff4545;        
+  --white:     #ffffff;       
+  
+  /* Elementos de formas */
+  --radius:    12px;           
+  --radius-lg: 20px;           
+  --shadow:    0 8px 40px rgba(0,0,0,.6); 
+  
+  /* nnavbar= Altura fija  */
+  --nav-h:     72px;           
+  
+  /* Letra*/
+  --font-head: 'Bebas Neue', sans-serif;  
+  --font-body: 'DM Sans', sans-serif;     
+  
+  /* Animaciones */
+  --transition: .3s cubic-bezier(.4,0,.2,1); 
+}
+
+/* ══════════════════════════════════════════════════════
+   RESET Y CONFI BASE
+══════════════════════════════════════════════════════ */
+*, *::before, *::after {  /* Hace que todos los elemntos de caja tenga una confinguracion inicial   */
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html { 
+  scroll-behavior: smooth; 
+  font-size: 16px; /* Tamano de letra*/
+}
+
+body {  /* Aplica colores y tipografía base */
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Imágenes adaptables */
+img { 
+  display: block; 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+
+/* Estilo de enlaces */
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+/* Estilo de listas */
+ul { list-style: none; }
+
+/*Estilo de boton*/
+button { 
+  cursor: pointer; 
+  border: none; 
+  background: none; 
+  font-family: inherit; 
+}
+
+/* Formulario Base */
+input, textarea, select { 
+  font-family: inherit; 
+}
