@@ -78,7 +78,7 @@ a {
 /* Estilo de listas */
 ul { list-style: none; }
 
-/*Estilo de boton*/
+/*Base de boton*/
 button { 
   cursor: pointer; 
   border: none; 
@@ -90,3 +90,133 @@ button {
 input, textarea, select { 
   font-family: inherit; 
 }
+
+/* ══════════════════════════════════════════════════════
+   Helpers reutilizables (utils)
+══════════════════════════════════════════════════════ */
+.container  { /*Contenedor principal*/
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 24px; 
+}
+
+.section    {  /* Espacio general entre secciones */
+  padding: 100px 0; 
+}
+
+.accent-text { 
+  color: var(--accent); 
+}
+
+/* ══════════════════════════════════════════════════════
+   NAVBAR (Navegación fija superior)
+══════════════════════════════════════════════════════ */
+.navbar {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 100;
+  height: var(--nav-h);
+  
+  /* Efecto de vidrio */
+  background: rgba(10,10,10,.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+/* Scrolleado */
+.navbar.scrolled {
+  background: rgba(10,10,10,.98);
+  box-shadow: 0 4px 30px rgba(0,0,0,.6);
+}
+
+/* Diseno interno de NavBar */
+.nav-inner {
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 24px;
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  gap: 32px;
+}
+
+/* Enlaces de navBar */
+.nav-links { 
+  display: flex; 
+  gap: 8px; 
+  margin-left: auto; 
+}
+.nav-link {
+  padding: 8px 14px; 
+  border-radius: 8px;
+  font-size: .9rem; 
+  font-weight: 500;
+  color: var(--text-muted); 
+  transition: var(--transition);
+}
+.nav-link:hover { 
+  color: var(--accent); 
+  background: rgba(200,240,0,.08); 
+}
+
+/* Configuraciones del logo */
+.logo {
+  font-family: var(--font-head);
+  font-size: 1.6rem; 
+  letter-spacing: 2px;
+  color: var(--white); 
+  flex-shrink: 0; 
+}
+.logo span { 
+  color: var(--accent); 
+}
+
+/* ══════════════════════════════════════════════════════
+   Navegacion Mobile 
+══════════════════════════════════════════════════════ */
+.hamburger { /* Oculta por defecto en desktop */
+  display: none; 
+  flex-direction: column; 
+  gap: 5px;
+  width: 36px; 
+  padding: 4px;
+}
+.hamburger span {
+  display: block; 
+  height: 2px; 
+  background: var(--text);
+  border-radius: 2px; 
+  transition: var(--transition);
+}
+
+/* Animacione */
+.hamburger.open span:nth-child(1) { 
+  transform: translateY(7px) rotate(45deg); 
+}
+.hamburger.open span:nth-child(2) { 
+  opacity: 0; 
+  transform: scaleX(0); 
+}
+.hamburger.open span:nth-child(3) { 
+  transform: translateY(-7px) rotate(-45deg); 
+}
+
+.mobile-nav { /* Oculta */
+  display: none; 
+  flex-direction: column; 
+  gap: 4px;
+  padding: 12px 24px 16px;
+  border-top: 1px solid var(--border);
+}
+.mobile-nav.open { /* Aparece al Abrir */
+  display: flex; 
+}
+.mobile-nav .nav-link { 
+  display: block; 
+  padding: 10px 0; 
+}
+
+
