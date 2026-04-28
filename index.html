@@ -1,159 +1,214 @@
 <!DOCTYPE html>
-<!-- Define el tipo de documento como HTML5 -->
-    
 <html lang="es">
-<!-- Indica que la página está en español -->
-
 <head>
   <meta charset="UTF-8" />
-  <!-- Permite usar caracteres como acentos y ñ -->
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Hace que la página se adapte a diferentes tamaños de pantalla (responsive) -->
-
-  <title>FIKASPORT — Equípate para Ganar</title>
-  <!-- Título que aparece en la pestaña del navegador -->
-
+  <title>APEX SPORT — Equípate para Ganar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <!-- Prepara la conexión con Google Fonts para que cargue más rápido -->
-
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Optimiza la conexión con el servidor de fuentes -->
-
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <!-- Importa fuentes personalizadas -->
-
   <link rel="stylesheet" href="styles.css" />
-  <!-- Conecta el archivo CSS donde están los estilos -->
-
 </head>
-
 <body>
-<!-- Aquí empieza todo lo visible en la página (lo que el usuario mira) -->
 
-  <!-- NAVBAR: barra de navegación superior -->
+  <!-- ══════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════ -->
   <nav class="navbar" id="navbar">
-  <!-- <nav> sirve para agrupar enlaces de navegación -->
-
     <div class="nav-inner">
-    <!-- <div> es un contenedor para organizar elementos -->
-
       <a href="#hero" class="logo">APEX<span>SPORT</span></a>
-      <!-- <a> es un enlace, en este caso lleva al inicio -->
-      <!-- <span> sirve para dar estilo a una parte del texto -->
 
       <ul class="nav-links">
-      <!-- <ul> crea una lista no ordenada -->
-
         <li><a href="#productos" class="nav-link">Productos</a></li>
-        <!-- <li> es un elemento de la lista -->
-        <!-- Cada <a> lleva a una sección de la página -->
-
         <li><a href="#categorias" class="nav-link">Categorías</a></li>
         <li><a href="#servicios" class="nav-link">Servicios</a></li>
         <li><a href="#contacto" class="nav-link">Contacto</a></li>
       </ul>
 
-      <button class="cart-btn" id="cartBtn">
-      <!-- <button> crea un botón interactivo -->
-
-
-            <!-- SVG = icono vectorial -->
-        <svg></svg>
-
+      <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
         <span class="cart-count" id="cartCount">0</span>
-        <!-- Muestra cuántos productos hay en el carrito -->
       </button>
 
-      <button class="hamburger" id="hamburger">
-      <!-- Botón para menú en celular -->
+      <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
     </div>
 
-    <!-- Menú que aparece en celulares -->
+    <!-- Mobile nav -->
     <ul class="mobile-nav" id="mobileNav">
-      <li><a href="#productos">Productos</a></li>
-      <li><a href="#categorias">Categorías</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#productos" class="nav-link">Productos</a></li>
+      <li><a href="#categorias" class="nav-link">Categorías</a></li>
+      <li><a href="#servicios" class="nav-link">Servicios</a></li>
+      <li><a href="#contacto" class="nav-link">Contacto</a></li>
     </ul>
   </nav>
 
-  <!-- HERO: sección principal (lo primero que ve el usuario) -->
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
   <section class="hero" id="hero">
-  <!-- <section> agrupa contenido importante de la página -->
-
     <div class="hero-bg">
-    <!-- Fondo decorativo -->
-      <div></div>
+      <div class="hero-grid"></div>
+      <div class="hero-blob blob1"></div>
+      <div class="hero-blob blob2"></div>
     </div>
 
     <div class="hero-content">
-    <!-- Contenido principal (texto y botones) -->
-
-      <h1>
-      <!-- <h1> es el título principal de la página -->
-        EQUÍPATE PARA GANAR
+      <div class="hero-tag reveal-up" style="--d:0s">⚡ Nueva colección 2025</div>
+      <h1 class="hero-title reveal-up" style="--d:.1s">
+        EQUÍPATE<br />
+        <span class="accent-text">PARA</span><br />
+        GANAR
       </h1>
-
-      <p>
-      <!-- <p> es un párrafo -->
-        Gear profesional para atletas
+      <p class="hero-sub reveal-up" style="--d:.25s">
+        Gear profesional para atletas que van en serio. Rendimiento sin límites.
       </p>
+      <div class="hero-actions reveal-up" style="--d:.38s">
+        <a href="#productos" class="btn btn-primary">Ver Productos</a>
+        <a href="#servicios" class="btn btn-outline">Nuestros Servicios</a>
+      </div>
 
-      <div>
-      <!-- Contenedor de botones -->
-        <a href="#productos">Ver Productos</a>
-        <a href="#servicios">Servicios</a>
+      <!-- Stats -->
+      <div class="hero-stats reveal-up" style="--d:.5s">
+        <div class="stat"><span class="stat-num" data-target="3500">0</span><span class="stat-label">Productos</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><span class="stat-num" data-target="18000">0</span><span class="stat-label">Clientes</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><span class="stat-num" data-target="12">0</span><span class="stat-label">Años</span></div>
       </div>
     </div>
 
-    <div class="hero-visual">
-    <!-- Parte visual (imagen principal) -->
-      <img src="..." alt="Tenis deportivos" />
-      <!-- <img> muestra una imagen -->
+    <div class="hero-visual reveal-right">
+      <div class="hero-shoe-wrap">
+        <div class="hero-circle-bg"></div>
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop" 
+             alt="Tenis deportivos"
+             class="hero-shoe"
+             onerror="this.src='https://placehold.co/500x500/1a1a1a/c8f000?text=APEX+SPORT'" />
+        <div class="hero-badge">
+          <span>NEW</span>
+          <span>DROP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- CATEGORÍAS: muestra tipos de productos -->
-  <section class="categorias" id="categorias">
-    <div>
-      <h2>Categorías</h2>
-      <!-- <h2> subtítulo de sección -->
+  <!-- ══════════════════════════════════════
+       MARQUEE BAND
+  ══════════════════════════════════════ -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <span>RUNNING</span><span class="dot">✦</span>
+      <span>CROSSFIT</span><span class="dot">✦</span>
+      <span>NATACIÓN</span><span class="dot">✦</span>
+      <span>CICLISMO</span><span class="dot">✦</span>
+      <span>FÚTBOL</span><span class="dot">✦</span>
+      <span>BASQUETBOL</span><span class="dot">✦</span>
+      <span>TENIS</span><span class="dot">✦</span>
+      <span>YOGA</span><span class="dot">✦</span>
+      <span>RUNNING</span><span class="dot">✦</span>
+      <span>CROSSFIT</span><span class="dot">✦</span>
+      <span>NATACIÓN</span><span class="dot">✦</span>
+      <span>CICLISMO</span><span class="dot">✦</span>
+      <span>FÚTBOL</span><span class="dot">✦</span>
+      <span>BASQUETBOL</span><span class="dot">✦</span>
+      <span>TENIS</span><span class="dot">✦</span>
+      <span>YOGA</span><span class="dot">✦</span>
+    </div>
+  </div>
 
-      <div>
-      <!-- Contenedor de tarjetas -->
-        <div>
-        <!-- Tarjeta individual -->
-          <img src="..." alt="Running" />
-          <h3>Running</h3>
-          <p>Productos para correr</p>
+  <!-- ══════════════════════════════════════
+       CATEGORÍAS
+  ══════════════════════════════════════ -->
+  <section class="section categorias" id="categorias">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <p class="section-tag">Explora</p>
+        <h2 class="section-title">Categorías</h2>
+      </div>
+
+      <div class="cat-grid">
+        <!-- cada tarjeta -->
+        <div class="cat-card reveal-up" style="--d:.05s" data-filter="running">
+          <img src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&auto=format&fit=crop" 
+               alt="Running"
+               onerror="this.src='https://placehold.co/400x300/111/c8f000?text=Running'" />
+          <div class="cat-overlay">
+            <span class="cat-icon">🏃</span>
+            <h3>Running</h3>
+            <p>Tenis, ropa y accesorios</p>
+          </div>
+        </div>
+
+        <div class="cat-card reveal-up" style="--d:.1s" data-filter="crossfit">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&auto=format&fit=crop" 
+               alt="CrossFit"
+               onerror="this.src='https://placehold.co/400x300/111/c8f000?text=CrossFit'" />
+          <div class="cat-overlay">
+            <span class="cat-icon">🏋️</span>
+            <h3>CrossFit</h3>
+            <p>Equipo de alto rendimiento</p>
+          </div>
+        </div>
+
+        <div class="cat-card reveal-up" style="--d:.15s" data-filter="ciclismo">
+          <img src="https://images.unsplash.com/photo-1511994298241-608e28f14fde?w=400&auto=format&fit=crop"
+               alt="Ciclismo"
+               onerror="this.src='https://placehold.co/400x300/111/c8f000?text=Ciclismo'" />
+          <div class="cat-overlay">
+            <span class="cat-icon">🚴</span>
+            <h3>Ciclismo</h3>
+            <p>Cascos, ropa y complementos</p>
+          </div>
+        </div>
+
+        <div class="cat-card reveal-up" style="--d:.2s" data-filter="natacion">
+          <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&auto=format&fit=crop"
+               alt="Natación"
+               onerror="this.src='https://placehold.co/400x300/111/c8f000?text=Natación'" />
+          <div class="cat-overlay">
+            <span class="cat-icon">🏊</span>
+            <h3>Natación</h3>
+            <p>Trajes, goggles y tablas</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-    <!-- PRODUCTOS: lista de productos -->
-  <section class="productos" id="productos">
-    <div>
-      <h2>Productos Destacados</h2>
-
-      <div>
-      <!-- Botones para filtrar productos -->
-        <button>Todos</button>
+  <!-- ══════════════════════════════════════
+       PRODUCTOS DESTACADOS
+  ══════════════════════════════════════ -->
+  <section class="section productos" id="productos">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <p class="section-tag">Tienda</p>
+        <h2 class="section-title">Productos Destacados</h2>
       </div>
 
-      <div id="productsGrid">
-      <!-- Aquí se insertan productos con JavaScript -->
+      <!-- Filtros -->
+      <div class="filter-bar reveal-up">
+        <button class="filter-btn active" data-cat="all">Todos</button>
+        <button class="filter-btn" data-cat="running">Running</button>
+        <button class="filter-btn" data-cat="crossfit">CrossFit</button>
+        <button class="filter-btn" data-cat="ciclismo">Ciclismo</button>
+        <button class="filter-btn" data-cat="natacion">Natación</button>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- Generado por JS -->
       </div>
     </div>
   </section>
-
-
-
-
-
 
 
 
