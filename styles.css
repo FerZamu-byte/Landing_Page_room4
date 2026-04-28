@@ -220,3 +220,266 @@ input, textarea, select {
 }
 
 
+
+/* ══════════════════════════════════════════════════════
+   Seccion principal de bienvenida(Hero)
+══════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;/* Ocupa toda la pantalla */
+  display: grid; /* 2 columnas */
+  grid-template-columns: 1fr 1fr;
+  align-items: center; 
+  gap: 48px;
+  padding: calc(var(--nav-h) + 60px) 8% 80px;/*Padding con nav fija*/
+  position: relative; 
+  overflow: hidden;
+}
+
+/* Fondo de Hero*/
+.hero-bg { /* Container del fondo */
+  position: absolute; 
+  inset: 0; 
+  z-index: 0; 
+  overflow: hidden; 
+}
+.hero-grid {
+  position: absolute; 
+  inset: 0;
+  background-image:
+    /* EStilos de Lineas verticales y horizontales */
+    linear-gradient(rgba(200,240,0,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,240,0,.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+
+/* Estilos Elementos flotantes */
+.hero-blob { 
+  position: absolute; 
+  border-radius: 50%;
+  filter: blur(100px); 
+  opacity: .25;
+}
+
+/* Definicion de animacion de pulsos */
+@keyframes blobPulse {
+  0%, 100% { transform: scale(1) translate(0,0); }
+  50% { transform: scale(1.15) translate(20px,-20px); }
+}
+.blob1 {
+  width: 600px; 
+  height: 600px;
+  background: radial-gradient(circle, var(--accent), transparent 70%);
+  top: -200px; 
+  right: -100px;
+  animation: blobPulse 8s ease-in-out infinite; /*Animacion de tipo pulso con ciclos de 8 seg*/ 
+}
+
+.blob2 {
+  width: 400px; 
+  height: 400px;
+  background: radial-gradient(circle, var(--accent2), transparent 70%);
+  bottom: -100px; 
+  left: 10%;
+  animation: blobPulse 10s ease-in-out infinite reverse;
+}
+
+
+
+/* Contenido de Hero */
+.hero-content { 
+  position: relative; /*Encima del Fondo*/
+  z-index: 1; 
+}
+
+.hero-tag {/* Bandge inicial*/
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px;
+  padding: 6px 16px; 
+  border-radius: 50px;
+  border: 1px solid rgba(200,240,0,.3);
+  background: rgba(200,240,0,.07);
+  color: var(--accent); 
+  font-size: .85rem; 
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.hero-title {  /* Titulo principal*/
+  font-family: var(--font-head);
+  font-size: clamp(4rem, 7vw, 7rem); /* Responsive */
+  line-height: .95; 
+  letter-spacing: 2px;
+  color: var(--white); 
+  margin-bottom: 24px;
+}
+
+.hero-sub { /* Subtítulo */
+  font-size: 1.1rem; 
+  color: var(--text-muted);
+  max-width: 440px; 
+  margin-bottom: 36px;
+}
+
+.hero-actions { /* Botones */
+  display: flex; 
+  gap: 16px; 
+  flex-wrap: wrap; 
+  margin-bottom: 56px; 
+}
+
+/* Estadisticas del Hero */
+.hero-stats {  /* Barra de estadistica */
+  display: flex; 
+  align-items: center; 
+  gap: 28px; 
+}
+.stat { /*estadistica individual*/
+  display: flex; 
+  flex-direction: column; 
+}
+.stat-num { /*Estilo de numero en estadisticas*/
+  font-family: var(--font-head); 
+  font-size: 2.4rem;
+  color: var(--accent); 
+  line-height: 1;
+}
+.stat-label { /*etiquetas*/
+  font-size: .8rem; 
+  color: var(--text-muted); 
+  margin-top: 2px; 
+}
+.stat-sep { /*Separacion Estadisticas*/
+  width: 1px; 
+  height: 44px; 
+  background: var(--border); 
+}
+
+/* Elemento visual principal */
+.hero-visual {
+  /* Contenedor del elemento */
+  position: relative; 
+  z-index: 1;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+.hero-shoe-wrap { 
+  position: relative; 
+  width: 100%; 
+  max-width: 500px; 
+}
+.hero-circle-bg { /* Círculo decorativo giratorio */
+  position: absolute; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 88%; 
+  padding-top: 88%; 
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(200,240,0,.15), rgba(0,240,200,.05), transparent 70%);
+  border: 1px solid rgba(200,240,0,.1);
+  animation: rotateSlow 20s linear infinite; /* Rotación continua */
+}
+/*Definicion de animacion rotatoria*/ 
+@keyframes rotateSlow { 
+  to { transform: translate(-50%,-50%) rotate(360deg); } 
+}
+
+.hero-shoe { /* Imagen principal*/
+  width: 100%; 
+  border-radius: var(--radius-lg);
+  transform: rotate(-8deg) translateY(0); /*Rotatorio*/
+  animation: floatShoe 4s ease-in-out infinite; /*Flotante*/
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.8)); /* Sombra */
+  object-fit: contain; 
+  background: transparent;
+}
+/*Definicion de animacion flotante*/
+@keyframes floatShoe {
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  50% { transform: rotate(-8deg) translateY(-16px); }
+}
+
+.hero-badge {
+  position: absolute; 
+  top: 12%; 
+  right: 4%;
+  background: var(--accent); 
+  color: #000;
+  padding: 10px 14px; 
+  border-radius: 10px;
+  text-align: center; 
+  line-height: 1;
+  display: flex; 
+  flex-direction: column; 
+  gap: 2px;
+  font-family: var(--font-head); 
+  font-size: 1rem; 
+  letter-spacing: 2px;
+  animation: badgePop 2s ease-in-out infinite; /*Rebote de dos segundos*/
+}
+
+/*Definicion de animacion rebote*/ 
+@keyframes badgePop {
+  0%, 100% { transform: scale(1) rotate(3deg); }
+  50% { transform: scale(1.05) rotate(3deg); }
+}
+
+/* SCROLL*/
+.scroll-hint { /* Scroll hacia abajo */
+  position: absolute; 
+  bottom: 32px; 
+  left: 50%; 
+  transform: translateX(-50%);
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 8px;
+  font-size: .75rem; 
+  color: var(--text-muted); 
+  letter-spacing: 2px;
+  text-transform: uppercase; 
+  z-index: 1;
+}
+.scroll-line { /* Animacion de linea */
+  width: 1px; 
+  height: 50px;
+  background: linear-gradient(to bottom, var(--text-muted), transparent);
+  animation: scrollLine 1.5s ease-in-out infinite;
+}
+/*Definicion de animacion de linea*/ 
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+
+
+/* Contador de items en carrito */
+.cart-count {
+  position: absolute; 
+  top: -6px; 
+  right: -6px;
+  width: 20px; 
+  height: 20px; 
+  border-radius: 50%;
+  background: var(--accent); 
+  color: #000;
+  font-size: .65rem; 
+  font-weight: 700;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  transform: scale(0); 
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.cart-count.show { 
+  transform: scale(1); /*Animacion de aparicion*/
+}
+
+
+
