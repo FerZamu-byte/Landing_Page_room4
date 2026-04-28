@@ -27,7 +27,7 @@
    └─ 19. Función de inicialización (DOMContentLoaded)
 
    Equipo: Kaleb · Yarilis · Arturo · Fernando
-   Proyecto: FYKA SPORT — 2025
+   Proyecto: FYKA SPORT — 2026
 ══════════════════════════════════════════════════════════════════════ */
 
 /* Activa el modo estricto de JavaScript: evita errores silenciosos,
@@ -113,7 +113,7 @@ const PRODUCTS = [
   {
     id: 12, cat: 'running', name: 'Mochila Hidratación 10L', price: 899, oldPrice: 1099,
     badge: 'sale', stars: 4.8, reviews: 98,
-    img: 'https://images.unsplash.com/photo-1591338624547-53e9a1b6c7f7?w=400&auto=format&fit=crop'
+    img: 'https://images.unsplash.com/photo-1752392185223-c1d5d5f1d7af?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   }
 ];
 
