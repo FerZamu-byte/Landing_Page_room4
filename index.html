@@ -1,94 +1,311 @@
 <!DOCTYPE html>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+  FYKA SPORT — index.html
+  ──────────────────────────────────────────────────────────────────────
+  Descripción: Documento principal de la tienda deportiva FYKA SPORT.
+  Contiene la estructura HTML semántica completa de la landing page.
+
+  Estructura del documento:
+  ┌─ <head>      Metadatos, fuentes de Google y hojas de estilo
+  ├─ <nav>       Navbar fija con logo, links, carrito y menú móvil
+  ├─ <section>   Hero — sección principal con imagen y estadísticas
+  ├─ <div>       Marquee band — banda de categorías animada
+  ├─ <section>   Categorías — grid de 4 tarjetas de categoría
+  ├─ <section>   Productos — filtros + contenedor del grid dinámico
+  ├─ <section>   Servicios — 6 tarjetas de servicios
+  ├─ <section>   CTA Banner — llamada a la acción con código de descuento
+  ├─ <section>   Contacto — información + formulario (Formspree)
+  ├─ <footer>    Footer con links, redes sociales y newsletter
+  ├─ <aside>     Carrito lateral (drawer) con overlay
+  ├─ <div>       Toast de notificaciones
+  └─ <div>       Modal de confirmación de compra
+
+  Convenciones usadas:
+  · Las clases CSS están definidas en styles.css
+  · Los IDs son usados por app.js para manipulación del DOM
+  · Las clases reveal-up / reveal-left / reveal-right activan
+    animaciones de entrada al hacer scroll (via IntersectionObserver en app.js)
+  · El atributo style="--d:Xs" define el delay de la animación
+    de entrada de cada elemento (variable CSS personalizada)
+  · Los atributos data-* comunican información entre HTML y JavaScript
+
+  Equipo: Kaleb · Yarilis · Arturo · Fernando
+  Proyecto: FYKA SPORT — 2025
+  ══════════════════════════════════════════════════════════════════════
+-->
 <html lang="es">
+<!-- lang="es" indica al navegador y a los lectores de pantalla
+     que el contenido está en español. Importante para accesibilidad y SEO. -->
+
 <head>
+  <!-- ══════════════════════════════════════════════════════════════
+       METADATOS Y CONFIGURACIÓN
+       ──────────────────────────────────────────────────────────────
+       Esta sección no es visible para el usuario, pero es fundamental
+       para que el navegador y los motores de búsqueda entiendan la página.
+  ══════════════════════════════════════════════════════════════════ -->
+
+  <!-- charset="UTF-8": permite mostrar caracteres especiales del español
+       como tildes (á, é), eñes (ñ) y símbolos (©, ⚡).
+       Siempre debe ser el primer meta del <head>. -->
   <meta charset="UTF-8" />
+
+  <!-- viewport: controla cómo se renderiza la página en dispositivos móviles.
+       · width=device-width → el ancho del viewport es igual al ancho del dispositivo.
+       · initial-scale=1.0  → sin zoom inicial al cargar la página.
+       Sin este meta, los móviles muestran la página como una versión de escritorio. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>APEX SPORT — Equípate para Ganar</title>
+
+  <!-- Título que aparece en la pestaña del navegador y en los resultados de búsqueda.
+       El formato recomendado es "Nombre de página — Nombre del sitio". -->
+  <title>FYKA SPORT — Equípate para Ganar</title>
+
+  <!-- Preconnect: le indica al navegador que establezca conexión con los servidores
+       de Google Fonts lo antes posible, antes de que el CSS los solicite.
+       Esto reduce el tiempo de carga de las fuentes entre 100–200ms. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- crossorigin es necesario porque gstatic.com es un dominio diferente
+       al de googleapis.com (CORS). Sin él, el preconnect no funciona correctamente. -->
+
+  <!-- Carga de las fuentes desde Google Fonts:
+       · Bebas Neue          → tipografía display (títulos, logo, precios)
+       · DM Sans 300,400,500,700 → tipografía de cuerpo en 4 pesos
+       · display=swap        → muestra primero la fuente del sistema y la
+                               reemplaza cuando Bebas Neue / DM Sans carguen.
+                               Evita el "flash de texto invisible" (FOIT). -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Hoja de estilos principal del proyecto.
+       Contiene todas las variables CSS, componentes, animaciones y media queries.
+       Se carga ANTES del body para evitar el parpadeo de estilos sin aplicar (FOUC). -->
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
+<!-- El body contiene todo el contenido visible de la página.
+     El orden de los elementos importa para el flujo visual y la accesibilidad:
+     navbar → hero → contenido → footer → elementos flotantes (carrito, modal, toast). -->
 
-  <!-- ══════════════════════════════════════
-       NAVBAR
-  ══════════════════════════════════════ -->
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 1 — NAVBAR
+       ──────────────────────────────────────────────────────────────
+       Barra de navegación fija en la parte superior de la pantalla.
+       Permanece visible mientras el usuario hace scroll (position: fixed en CSS).
+
+       Comportamientos controlados por app.js (initNavbar()):
+       · Al hacer scroll > 50px → agrega clase .scrolled (fondo más opaco)
+       · Botón hamburger → despliega/colapsa .mobile-nav en móviles
+       · Links de navegación → smooth scroll hacia cada sección
+
+       Estructura:
+       nav.navbar
+       └── div.nav-inner (contenedor centrado max-width 1200px)
+           ├── a.logo          (logotipo con enlace al hero)
+           ├── ul.nav-links    (links de navegación — solo desktop)
+           ├── button#cartBtn  (ícono del carrito con contador)
+           └── button#hamburger (menú para móviles — 3 líneas / X)
+       └── ul.mobile-nav   (menú desplegable para móviles)
+       Responsable: Arturo
+  ══════════════════════════════════════════════════════════════════ -->
   <nav class="navbar" id="navbar">
+    <!-- nav-inner: limita el ancho máximo y centra el contenido del navbar.
+         Usa flexbox para alinear logo, links y botones en una fila. -->
     <div class="nav-inner">
-      <a href="#hero" class="logo">APEX<span>SPORT</span></a>
 
+      <!-- Logo: enlace con el nombre de la marca que lleva al hero (#hero).
+           El <span> dentro permite colorear "SPORT" con el color acento
+           usando CSS: .logo span { color: var(--accent); } -->
+      <a href="#hero" class="logo">FYKA<span>SPORT</span></a>
+
+      <!-- Links de navegación desktop.
+           Cada <li> contiene un enlace hacia una sección por su ID.
+           En mobile (<=768px) esta lista se oculta con CSS y se usa .mobile-nav. -->
       <ul class="nav-links">
-        <li><a href="#productos" class="nav-link">Productos</a></li>
+        <li><a href="#productos"  class="nav-link">Productos</a></li>
         <li><a href="#categorias" class="nav-link">Categorías</a></li>
-        <li><a href="#servicios" class="nav-link">Servicios</a></li>
-        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        <li><a href="#servicios"  class="nav-link">Servicios</a></li>
+        <li><a href="#contacto"   class="nav-link">Contacto</a></li>
       </ul>
 
+      <!-- Botón del carrito de compras.
+           · aria-label="Abrir carrito" → describe la función del botón
+             a lectores de pantalla (accesibilidad).
+           · El SVG es el ícono de la bolsa de compras, dibujado en línea
+             para evitar una petición HTTP extra y poder cambiar su color con CSS.
+           · #cartCount → span donde app.js muestra el número de productos.
+             Inicia en "0" y se oculta hasta que se agrega algo al carrito. -->
       <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">
+        <!-- Ícono SVG de bolsa de compras.
+             · viewBox="0 0 24 24"   → sistema de coordenadas 24x24 (diseño estándar)
+             · fill="none"           → sin relleno (solo trazos)
+             · stroke="currentColor" → hereda el color del texto del elemento padre
+             · stroke-width="2"      → grosor de línea -->
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+          <!-- Cuerpo de la bolsa: forma trapezoidal -->
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <!-- Línea horizontal que divide la parte superior del cuerpo -->
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <!-- Asa de la bolsa: arco en la parte superior -->
           <path d="M16 10a4 4 0 01-8 0"/>
         </svg>
+        <!-- Contador de ítems en el carrito.
+             app.js actualiza su textContent y alterna la clase .show
+             para mostrarlo/ocultarlo con animación CSS. -->
         <span class="cart-count" id="cartCount">0</span>
       </button>
 
+      <!-- Botón hamburger para abrir el menú en móviles.
+           Los tres <span> son las líneas del ícono de menú.
+           Al hacer clic, app.js agrega la clase .open que transforma
+           las líneas en una X mediante CSS (transform + rotate). -->
       <button class="hamburger" id="hamburger" aria-label="Menú">
-        <span></span><span></span><span></span>
+        <span></span><!-- Línea superior -->
+        <span></span><!-- Línea central -->
+        <span></span><!-- Línea inferior -->
       </button>
     </div>
 
-    <!-- Mobile nav -->
+    <!-- Menú de navegación para dispositivos móviles.
+         Permanece oculto (display: none) por defecto en CSS.
+         app.js alterna la clase .open para mostrarlo/ocultarlo.
+         Duplica los mismos links que .nav-links para consistencia. -->
     <ul class="mobile-nav" id="mobileNav">
-      <li><a href="#productos" class="nav-link">Productos</a></li>
+      <li><a href="#productos"  class="nav-link">Productos</a></li>
       <li><a href="#categorias" class="nav-link">Categorías</a></li>
-      <li><a href="#servicios" class="nav-link">Servicios</a></li>
-      <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      <li><a href="#servicios"  class="nav-link">Servicios</a></li>
+      <li><a href="#contacto"   class="nav-link">Contacto</a></li>
     </ul>
   </nav>
 
-  <!-- ══════════════════════════════════════
-       HERO
-  ══════════════════════════════════════ -->
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 2 — HERO
+       ──────────────────────────────────────────────────────────────
+       Primera sección visible al cargar la página. Ocupa el 100% de la
+       altura de la pantalla (100vh) y presenta la propuesta de valor
+       principal de FYKA SPORT junto con la imagen destacada.
+
+       Estructura:
+       section.hero#hero
+       ├── div.hero-bg          (fondo animado: grid + blobs de luz)
+       ├── div.hero-content     (columna izquierda: textos y CTAs)
+       │   ├── div.hero-tag     (etiqueta "Nueva colección 2025")
+       │   ├── h1.hero-title    (título principal en 3 líneas)
+       │   ├── p.hero-sub       (subtítulo descriptivo)
+       │   ├── div.hero-actions (botones CTA)
+       │   └── div.hero-stats   (estadísticas animadas)
+       ├── div.hero-visual      (columna derecha: imagen del producto)
+       └── div.scroll-hint      (indicador de scroll al fondo)
+
+       Animaciones: los elementos con .reveal-up y style="--d:Xs" se
+       animan al cargar con delays escalonados (0s, .1s, .25s, .38s, .5s)
+       gracias a la variable CSS --d usada en styles.css.
+       Responsable: Arturo
+  ══════════════════════════════════════════════════════════════════ -->
   <section class="hero" id="hero">
+
+    <!-- Fondo decorativo del hero: contiene elementos puramente visuales.
+         No tiene contenido semántico, por eso es un <div> y no <section>.
+         Los blobs de luz se animan con @keyframes blobPulse en CSS. -->
     <div class="hero-bg">
+      <!-- hero-grid: patrón de cuadrícula sutil creado con background-image CSS
+           (dos linear-gradients superpuestos formando una rejilla). -->
       <div class="hero-grid"></div>
+      <!-- blob1: mancha de luz verde-neon grande en la esquina superior derecha.
+           blob2: mancha de luz cyan más pequeña en la parte inferior izquierda.
+           Ambas se mueven con parallax al hacer scroll (initHeroParallax en app.js). -->
       <div class="hero-blob blob1"></div>
       <div class="hero-blob blob2"></div>
     </div>
 
+    <!-- Columna izquierda: contenido textual y botones de acción.
+         Los elementos hijos tienen .reveal-up con delays crecientes para
+         aparecer de forma escalonada al cargar la página. -->
     <div class="hero-content">
+
+      <!-- Etiqueta de novedad: pill visual que llama la atención.
+           · reveal-up      → animación de entrada desde abajo
+           · style="--d:0s" → sin delay, es el primer elemento en aparecer -->
       <div class="hero-tag reveal-up" style="--d:0s">⚡ Nueva colección 2025</div>
+
+      <!-- Título principal h1: el más importante de la página (uno solo por página).
+           Usa saltos de línea <br /> para controlar el diseño visual.
+           · .accent-text → aplica color neon (#C8F000) a "PARA" en CSS
+           · --d:.1s      → aparece 100ms después del tag -->
       <h1 class="hero-title reveal-up" style="--d:.1s">
         EQUÍPATE<br />
         <span class="accent-text">PARA</span><br />
         GANAR
       </h1>
+
+      <!-- Subtítulo: descripción breve del valor de la tienda.
+           Aparece 250ms después del tag (--d:.25s). -->
       <p class="hero-sub reveal-up" style="--d:.25s">
         Gear profesional para atletas que van en serio. Rendimiento sin límites.
       </p>
+
+      <!-- Contenedor de botones de llamada a la acción (CTAs).
+           · btn-primary → botón sólido con fondo acento (ir a productos)
+           · btn-outline  → botón con solo borde (ir a servicios)
+           Aparecen 380ms después del tag (--d:.38s). -->
       <div class="hero-actions reveal-up" style="--d:.38s">
         <a href="#productos" class="btn btn-primary">Ver Productos</a>
         <a href="#servicios" class="btn btn-outline">Nuestros Servicios</a>
       </div>
 
-      <!-- Stats -->
+      <!-- Estadísticas de la tienda: tres métricas clave con animación de contador.
+           · data-target="N" → valor final al que contará el número (leído por app.js)
+           · Los span.stat-num inician en "0" y son animados por animateCounter() en app.js
+           · .stat-sep → separadores verticales entre estadísticas
+           Aparecen 500ms después del tag (--d:.5s). -->
       <div class="hero-stats reveal-up" style="--d:.5s">
-        <div class="stat"><span class="stat-num" data-target="3500">0</span><span class="stat-label">Productos</span></div>
+        <div class="stat">
+          <span class="stat-num" data-target="3500">0</span>
+          <span class="stat-label">Productos</span>
+        </div>
         <div class="stat-sep"></div>
-        <div class="stat"><span class="stat-num" data-target="18000">0</span><span class="stat-label">Clientes</span></div>
+        <div class="stat">
+          <span class="stat-num" data-target="18000">0</span>
+          <span class="stat-label">Clientes</span>
+        </div>
         <div class="stat-sep"></div>
-        <div class="stat"><span class="stat-num" data-target="12">0</span><span class="stat-label">Años</span></div>
+        <div class="stat">
+          <span class="stat-num" data-target="12">0</span>
+          <span class="stat-label">Años</span>
+        </div>
       </div>
     </div>
 
+    <!-- Columna derecha: imagen visual destacada del producto.
+         · reveal-right → la imagen entra desde la derecha al cargar.
+         · initHeroParallax() en app.js aplica transform al .hero-shoe
+           para moverla al hacer scroll, creando el efecto de profundidad. -->
     <div class="hero-visual reveal-right">
       <div class="hero-shoe-wrap">
+
+        <!-- Círculo decorativo de fondo: gradiente radial animado con CSS.
+             Da profundidad visual a la imagen del producto. -->
         <div class="hero-circle-bg"></div>
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop" 
-             alt="Tenis deportivos"
-             class="hero-shoe"
-             onerror="this.src='https://placehold.co/500x500/1a1a1a/c8f000?text=APEX+SPORT'" />
+
+        <!-- Imagen principal del producto (tenis deportivos).
+             · loading="lazy"   → carga diferida: no bloquea el renderizado inicial.
+             · onerror          → si la URL de Unsplash falla, muestra una imagen
+                                  de placeholder generada por placehold.co con los
+                                  colores de FYKA SPORT.
+             · class="hero-shoe"→ app.js referencia esta clase para el parallax. -->
+        <img
+          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop"
+          alt="Tenis deportivos FYKA SPORT"
+          class="hero-shoe"
+          onerror="this.src='https://placehold.co/500x500/1a1a1a/c8f000?text=FYKA+SPORT'"
+        />
+
+        <!-- Badge "NEW DROP": etiqueta decorativa flotante sobre la imagen.
+             Posicionada con CSS absolute sobre .hero-shoe-wrap.
+             Se anima con @keyframes badgePop (escala pulsante). -->
         <div class="hero-badge">
           <span>NEW</span>
           <span>DROP</span>
@@ -96,17 +313,34 @@
       </div>
     </div>
 
+    <!-- Indicador de scroll: elemento visual que le dice al usuario que
+         puede hacer scroll hacia abajo. Posicionado en el centro del hero.
+         La .scroll-line se anima con @keyframes scrollLine en CSS. -->
     <div class="scroll-hint">
       <span>Scroll</span>
       <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════
-       MARQUEE BAND
-  ══════════════════════════════════════ -->
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 3 — MARQUEE BAND
+       ──────────────────────────────────────────────────────────────
+       Banda horizontal animada que desplaza indefinidamente los nombres
+       de las categorías deportivas. Sirve como separador visual entre
+       el hero y las categorías, y refuerza la variedad de la tienda.
+
+       Técnica: el contenido está duplicado (x2) dentro de .marquee-track
+       para crear un loop visual perfecto sin saltos. La animación CSS
+       (@keyframes marquee) desplaza el track al -50% de su ancho total,
+       momento en que la primera copia termina y la segunda toma su lugar.
+       Responsable: Fernando
+  ══════════════════════════════════════════════════════════════════ -->
   <div class="marquee-band">
+    <!-- marquee-track: el contenedor que se desplaza con la animación CSS.
+         Contiene 16 ítems (8 categorías x 2 repeticiones) para el loop. -->
     <div class="marquee-track">
+      <!-- Primera copia de las 8 categorías -->
       <span>RUNNING</span><span class="dot">✦</span>
       <span>CROSSFIT</span><span class="dot">✦</span>
       <span>NATACIÓN</span><span class="dot">✦</span>
@@ -115,6 +349,7 @@
       <span>BASQUETBOL</span><span class="dot">✦</span>
       <span>TENIS</span><span class="dot">✦</span>
       <span>YOGA</span><span class="dot">✦</span>
+      <!-- Segunda copia idéntica — necesaria para el loop continuo sin saltos -->
       <span>RUNNING</span><span class="dot">✦</span>
       <span>CROSSFIT</span><span class="dot">✦</span>
       <span>NATACIÓN</span><span class="dot">✦</span>
@@ -126,22 +361,47 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       CATEGORÍAS
-  ══════════════════════════════════════ -->
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 4 — CATEGORÍAS
+       ──────────────────────────────────────────────────────────────
+       Grid de 4 tarjetas que representan las disciplinas deportivas
+       de la tienda. Cada tarjeta tiene un comportamiento doble:
+       · Visualmente → hover con zoom en imagen y overlay más oscuro
+       · Funcionalmente → clic que activa el filtro correspondiente en
+         la sección de Productos y hace scroll hacia ella (initFilters en app.js)
+
+       Atributo data-filter en cada .cat-card: comunica la categoría a app.js.
+       El valor debe coincidir exactamente con los valores de cat en el array
+       PRODUCTS de app.js ('running', 'crossfit', 'ciclismo', 'natacion').
+       Responsable: Fernando
+  ══════════════════════════════════════════════════════════════════ -->
   <section class="section categorias" id="categorias">
     <div class="container">
+
+      <!-- Encabezado de sección: patrón reutilizable en todas las secciones.
+           · .section-tag   → etiqueta pequeña en color acento
+           · .section-title → título principal de la sección en Bebas Neue
+           · reveal-up      → anima la entrada cuando la sección es visible en pantalla -->
       <div class="section-header reveal-up">
         <p class="section-tag">Explora</p>
         <h2 class="section-title">Categorías</h2>
       </div>
 
+      <!-- Grid de 4 columnas en desktop, 2x2 en tablet, 1 columna en móvil. -->
       <div class="cat-grid">
-        <!-- cada tarjeta -->
+
+        <!-- Tarjeta: Running
+             · data-filter="running" → valor que app.js usa para filtrar productos
+             · reveal-up + --d:.05s  → entrada animada con 50ms de delay -->
         <div class="cat-card reveal-up" style="--d:.05s" data-filter="running">
-          <img src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&auto=format&fit=crop" 
-               alt="Running"
-               onerror="this.src='https://placehold.co/400x300/111/c8f000?text=Running'" />
+          <img
+            src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&auto=format&fit=crop"
+            alt="Categoría Running — tenis y ropa para correr"
+            onerror="this.src='https://placehold.co/400x300/111/c8f000?text=Running'"
+          />
+          <!-- cat-overlay: capa con gradiente oscuro sobre la imagen que
+               contiene el ícono, nombre y descripción de la categoría. -->
           <div class="cat-overlay">
             <span class="cat-icon">🏃</span>
             <h3>Running</h3>
@@ -149,10 +409,13 @@
           </div>
         </div>
 
+        <!-- Tarjeta: CrossFit — delay 100ms -->
         <div class="cat-card reveal-up" style="--d:.1s" data-filter="crossfit">
-          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&auto=format&fit=crop" 
-               alt="CrossFit"
-               onerror="this.src='https://placehold.co/400x300/111/c8f000?text=CrossFit'" />
+          <img
+            src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&auto=format&fit=crop"
+            alt="Categoría CrossFit — equipo de entrenamiento funcional"
+            onerror="this.src='https://placehold.co/400x300/111/c8f000?text=CrossFit'"
+          />
           <div class="cat-overlay">
             <span class="cat-icon">🏋️</span>
             <h3>CrossFit</h3>
@@ -160,10 +423,13 @@
           </div>
         </div>
 
+        <!-- Tarjeta: Ciclismo — delay 150ms -->
         <div class="cat-card reveal-up" style="--d:.15s" data-filter="ciclismo">
-          <img src="https://images.unsplash.com/photo-1511994298241-608e28f14fde?w=400&auto=format&fit=crop"
-               alt="Ciclismo"
-               onerror="this.src='https://placehold.co/400x300/111/c8f000?text=Ciclismo'" />
+          <img
+            src="https://images.unsplash.com/photo-1511994298241-608e28f14fde?w=400&auto=format&fit=crop"
+            alt="Categoría Ciclismo — cascos, ropa y complementos"
+            onerror="this.src='https://placehold.co/400x300/111/c8f000?text=Ciclismo'"
+          />
           <div class="cat-overlay">
             <span class="cat-icon">🚴</span>
             <h3>Ciclismo</h3>
@@ -171,32 +437,55 @@
           </div>
         </div>
 
+        <!-- Tarjeta: Natación — delay 200ms -->
         <div class="cat-card reveal-up" style="--d:.2s" data-filter="natacion">
-          <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&auto=format&fit=crop"
-               alt="Natación"
-               onerror="this.src='https://placehold.co/400x300/111/c8f000?text=Natación'" />
+          <img
+            src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&auto=format&fit=crop"
+            alt="Categoría Natación — trajes, goggles y accesorios"
+            onerror="this.src='https://placehold.co/400x300/111/c8f000?text=Natación'"
+          />
           <div class="cat-overlay">
             <span class="cat-icon">🏊</span>
             <h3>Natación</h3>
             <p>Trajes, goggles y tablas</p>
           </div>
         </div>
-      </div>
-    </div>
+
+      </div><!-- /cat-grid -->
+    </div><!-- /container -->
   </section>
 
-  <!-- ══════════════════════════════════════
-       PRODUCTOS DESTACADOS
-  ══════════════════════════════════════ -->
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 5 — PRODUCTOS DESTACADOS
+       ──────────────────────────────────────────────────────────────
+       Esta sección contiene los filtros de categoría y el grid de
+       tarjetas de producto. IMPORTANTE: el grid (#productsGrid) está
+       vacío en el HTML porque app.js lo genera dinámicamente al cargar
+       la página mediante la función renderProducts().
+
+       Si JavaScript está deshabilitado, esta sección no mostrará productos.
+
+       Los botones de .filter-bar tienen:
+       · .active   → clase que marca el filtro actualmente seleccionado
+       · data-cat  → valor de categoría que app.js usa para filtrar.
+                     'all' muestra todos los productos.
+       Responsable: Fernando / Arturo
+  ══════════════════════════════════════════════════════════════════ -->
   <section class="section productos" id="productos">
     <div class="container">
+
       <div class="section-header reveal-up">
         <p class="section-tag">Tienda</p>
         <h2 class="section-title">Productos Destacados</h2>
       </div>
 
-      <!-- Filtros -->
+      <!-- Barra de filtros: botones para filtrar el grid por categoría.
+           La clase .active en el botón "Todos" indica que inicia seleccionado.
+           app.js (initFilters) escucha los clics en este contenedor mediante
+           delegación de eventos y re-renderiza el grid al cambiar el filtro. -->
       <div class="filter-bar reveal-up">
+        <!-- data-cat="all" → muestra los 12 productos sin filtrar -->
         <button class="filter-btn active" data-cat="all">Todos</button>
         <button class="filter-btn" data-cat="running">Running</button>
         <button class="filter-btn" data-cat="crossfit">CrossFit</button>
@@ -204,519 +493,13 @@
         <button class="filter-btn" data-cat="natacion">Natación</button>
       </div>
 
+      <!-- Contenedor del grid de productos.
+           Inicia vacío — app.js inserta las tarjetas <article> aquí
+           mediante renderProducts() al cargar la página y cada vez
+           que el usuario cambia el filtro activo. -->
       <div class="products-grid" id="productsGrid">
-        <!-- Generado por JS -->
+        <!-- Las tarjetas de producto son generadas dinámicamente por app.js -->
       </div>
-    </div>
+
+    </div><!-- /container -->
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- ══════════════════════════════════════
-       SERVICIOS
-  ══════════════════════════════════════ -->
-  <section class="section servicios" id="servicios">
-    <div class="container">
-      <div class="section-header reveal-up">
-        <p class="section-tag">Lo que ofrecemos</p>
-        <h2 class="section-title">Servicios</h2>
-      </div>
-
-      <div class="services-grid">
-        <div class="service-card reveal-up" style="--d:.05s">
-          <div class="service-icon">🎯</div>
-          <h3>Asesoría Personalizada</h3>
-          <p>Nuestros expertos te ayudan a elegir el equipo perfecto para tu nivel y disciplina.</p>
-          <a href="#contacto" class="service-link">Agendar →</a>
-        </div>
-        <div class="service-card reveal-up" style="--d:.12s">
-          <div class="service-icon">🔧</div>
-          <h3>Mantenimiento de Equipo</h3>
-          <p>Reparación y mantenimiento de bicicletas, tenis y equipo de CrossFit.</p>
-          <a href="#contacto" class="service-link">Saber más →</a>
-        </div>
-        <div class="service-card reveal-up" style="--d:.19s">
-          <div class="service-icon">🚚</div>
-          <h3>Envío Express</h3>
-          <p>Entrega en 24–48 horas en toda la república. Gratis en compras mayores a $999.</p>
-          <a href="#productos" class="service-link">Comprar →</a>
-        </div>
-        <div class="service-card reveal-up" style="--d:.26s">
-          <div class="service-icon">🏅</div>
-          <h3>Programa de Lealtad</h3>
-          <p>Acumula puntos en cada compra y canjéalos por descuentos y productos exclusivos.</p>
-          <a href="#contacto" class="service-link">Unirse →</a>
-        </div>
-        <div class="service-card reveal-up" style="--d:.33s">
-          <div class="service-icon">📋</div>
-          <h3>Plan de Entrenamiento</h3>
-          <p>Guías y rutinas diseñadas por entrenadores profesionales para tu disciplina.</p>
-          <a href="#contacto" class="service-link">Descargar →</a>
-        </div>
-        <div class="service-card reveal-up" style="--d:.40s">
-          <div class="service-icon">↩️</div>
-          <h3>Devoluciones Fáciles</h3>
-          <p>30 días para cambios y devoluciones. Sin preguntas, sin complicaciones.</p>
-          <a href="#contacto" class="service-link">Ver política →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       BANNER CTA
-  ══════════════════════════════════════ -->
-  <section class="cta-banner reveal-up">
-    <div class="cta-bg"></div>
-    <div class="cta-content">
-      <h2>¿Listo para tu próximo nivel?</h2>
-      <p>Obtén 15% de descuento en tu primera compra con el código <strong>FYKA15</strong></p>
-      <a href="#productos" class="btn btn-dark">Comprar Ahora</a>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       CONTACTO
-  ══════════════════════════════════════ -->
-  <section class="section contacto" id="contacto">
-    <div class="container">
-      <div class="section-header reveal-up">
-        <p class="section-tag">Hablemos</p>
-        <h2 class="section-title">Contacto</h2>
-      </div>
-
-      <div class="contact-wrap">
-        <div class="contact-info reveal-left">
-          <div class="info-item">
-            <span class="info-icon">📍</span>
-            <div>
-              <h4>Dirección</h4>
-              <p>Av. Insurgentes Sur 1234, Col. Del Valle, CDMX</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <span class="info-icon">📞</span>
-            <div>
-              <h4>Teléfono</h4>
-              <p>+52 55 1234 5678</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <span class="info-icon">✉️</span>
-            <div>
-              <h4>Email</h4>
-              <p>hola@fykaport.mx</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <span class="info-icon">🕐</span>
-            <div>
-              <h4>Horario</h4>
-              <p>Lun–Vie 9am–8pm · Sáb 10am–6pm</p>
-            </div>
-          </div>
-        </div>
-            <!-- Esta es la dirección a donde se envían los datos. Formspree-->
-        <form class="contact-form reveal-right" id="contactForm"
-              action="https://formspree.io/f/xojyovle"
-              method="POST">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="nombre">Nombre</label>
-              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="tu@email.com" required />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="asunto">Asunto</label>
-            <input type="text" id="asunto" name="asunto" placeholder="¿En qué te podemos ayudar?" required />
-          </div>
-          <div class="form-group">
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escríbenos..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-full">Enviar Mensaje</button>
-          <div class="form-success" id="formSuccess">
-            ✅ ¡Mensaje enviado! Te contactaremos pronto.
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="#hero" class="logo">FYKA<span>SPORT</span></a>
-          <p>Equipo profesional para atletas que van en serio. Rendimiento, estilo y durabilidad.</p>
-          <div class="social-links">
-            <a href="#" aria-label="Instagram">📸</a>
-            <a href="#" aria-label="Facebook">👥</a>
-            <a href="#" aria-label="TikTok">🎵</a>
-            <a href="#" aria-label="YouTube">▶️</a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <h4>Tienda</h4>
-          <ul>
-            <li><a href="#productos">Productos</a></li>
-            <li><a href="#categorias">Categorías</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Ayuda</h4>
-          <ul>
-            <li><a href="#">Guía de Tallas</a></li>
-            <li><a href="#">Envíos</a></li>
-            <li><a href="#">Devoluciones</a></li>
-            <li><a href="#">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer-newsletter">
-          <h4>Newsletter</h4>
-          <p>Recibe ofertas y novedades exclusivas.</p>
-          <div class="newsletter-form">
-            <input type="email" placeholder="tu@email.com" />
-            <button class="btn btn-primary btn-sm">→</button>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2025 FYKA SPORT. Todos los derechos reservados.</p>
-        <p>Hecho con ⚡ para atletas</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ══════════════════════════════════════
-       CARRITO LATERAL
-  ══════════════════════════════════════ -->
-  <div class="cart-overlay" id="cartOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Carrito de compras">
-    <div class="cart-header">
-      <h3>Tu Carrito <span id="cartItemsCount">0 items</span></h3>
-      <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <div class="cart-empty" id="cartEmpty">
-        <span>🛒</span>
-        <p>Tu carrito está vacío</p>
-        <a href="#productos" class="btn btn-outline" id="goShop">Ver Productos</a>
-      </div>
-    </div>
-    <div class="cart-footer" id="cartFooter" style="display:none">
-      <div class="cart-total">
-        <span>Total</span>
-        <span class="total-amount" id="totalAmount">$0</span>
-      </div>
-      <button class="btn btn-primary btn-full" id="checkoutBtn">Proceder al Pago</button>
-    </div>
-  </aside>
-
-  <!-- Toast notification -->
-  <div class="toast" id="toast"></div>
-
-  <!-- Modal checkout -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal" id="checkoutModal">
-      <button class="modal-close" id="modalClose">✕</button>
-      <div class="modal-icon">🎉</div>
-      <h3>¡Pedido Confirmado!</h3>
-      <p>Tu pedido ha sido procesado exitosamente. Recibirás un email de confirmación en breve.</p>
-      <p class="modal-order">Orden #FYKA-<span id="orderNum"></span></p>
-      <button class="btn btn-primary" id="modalOk">Perfecto</button>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
