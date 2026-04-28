@@ -794,7 +794,7 @@ input, textarea, select {
 }
 
 /*Info del producto */
-.accent-text { 
+.product-info { 
   padding: 18px; 
 }
 .product-cat { /* Categoría del producto */
@@ -1090,6 +1090,7 @@ input, textarea, select {
   display: block; 
   animation: fadeInUp .3s ease; 
 }
+
 
 /* ══════════════════════════════════════════════════════
    FOOTER (Pie de página completo)
