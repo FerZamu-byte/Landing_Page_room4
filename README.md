@@ -46,6 +46,50 @@ El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints ge
 - Formulario de contacto con envío real vía Formspree
 
 ---
+## 🧩 Gestión del Proyecto
+
+El desarrollo de **FYKA SPORT** se llevó a cabo utilizando herramientas de gestión y diseño profesional para simular un entorno real de trabajo colaborativo.
+
+### 📌 Jira (Gestión ágil)
+
+Se utilizó :contentReference[oaicite:0]{index=0} para la planificación y seguimiento del proyecto bajo metodología **SCRUM**.
+
+**Implementación:**
+- Creación de backlog con historias de usuario
+- División del trabajo en sprints semanales
+- Asignación de tareas por integrante del equipo
+- Uso de ramas por feature (Git Flow)
+- Seguimiento de progreso mediante tablero Kanban
+
+**Ejemplo de flujo de trabajo:**
+1. Crear tarea en backlog
+2. Pasar a sprint activo
+3. Desarrollo en rama `feature/*`
+4. Pull Request hacia `develop`
+5. Revisión y merge
+
+![Jira](images/Jira.png) 
+
+---
+
+### 🎨 Figma (Diseño UI/UX)
+
+Se utilizó :contentReference[oaicite:1]{index=1} para el diseño visual y prototipado de la interfaz.
+
+**Proceso de diseño:**
+- Wireframes low-fi para estructura inicial
+- Moodboard para definir identidad visual (dark/neon)
+- Prototipo hi-fi interactivo
+- Definición de componentes reutilizables
+
+**Resultados:**
+- Diseño consistente en toda la aplicación
+- Mejora en la experiencia de usuario (UX)
+- Base clara para la implementación en HTML/CSS
+
+![Figma](images/Figma.png) 
+
+---
 
 ## 📸 Capturas de pantalla
 
@@ -53,7 +97,33 @@ El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints ge
 |---|---|
 | ![Desktop](images/Portada.png) | ![Mobile](images/PortadaMobil.png) |
 
+A continuación se muestran las principales secciones de la aplicación:
 
+### 🏠 Productos
+Vista del catálogo dinámico con filtros por categoría.
+
+![Productos](images/Productos.png)
+
+---
+
+### 📂 Categorías
+Sección de categorías con tarjetas interactivas y efectos hover.
+
+![Categorías](images/Categorías.png)
+
+---
+
+### 🛠️ Servicios
+Listado de servicios ofrecidos con diseño en grid y animaciones.
+
+![Servicios](images/Servicios.png)
+
+---
+
+### 📩 Contacto
+Formulario de contacto con validación y envío mediante Formspree.
+
+![Contacto](images/Contacto.png)
 
 
 ---
