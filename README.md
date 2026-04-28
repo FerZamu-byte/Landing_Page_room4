@@ -8,6 +8,7 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+![Jira](https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white)
 
 > Equípate para ganar. Gear profesional para atletas que van en serio.
 
@@ -32,7 +33,7 @@
 
 ## 🏪 Sobre el proyecto
 
-**FYKA SPORT** es una landing page interactiva para una tienda deportiva. El objetivo fue construir una plataforma online que presente productos y servicios de forma atractiva, intuitiva y completamente responsiva. Enfocada en una sola oferta o acción, deshaciéndonos de más páginas y teniendo toda la información desplegada en una sóla hoja. A diferencia de una web normal, elimina distracciones para guiar al usuario hacia la conversión.
+**FYKA SPORT** es una landing page interactiva para una tienda deportiva. El objetivo fue construir una plataforma online que presente productos y servicios de forma atractiva, intuitiva y completamente responsiva. Enfocada en una sola oferta o acción, deshaciéndonos de más páginas y teniendo toda la información desplegada en una sóla hoja. Diseñada como una Single Page Application (SPA-like) enfocada en conversión y experiencia de usuario.
 
 El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints gestionados en Jira como parte de un hackaton académico de 24 hrs por parte de la CH66 de Generation - México, partiendo desde wireframes en Figma hasta el producto final con HTML, CSS y JS.
 
@@ -52,7 +53,8 @@ El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints ge
 |---|---|
 | ![Desktop](images/Portada.png) | ![Mobile](images/PortadaMobil.png) |
 
-> Reemplaza estas imágenes con capturas reales del proyecto antes de entregar.
+
+
 
 ---
 
@@ -62,9 +64,9 @@ El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints ge
 |---|---|
 | **HTML5** | Estructura semántica (`<nav>`, `<section>`, `<article>`, `<aside>`) |
 | **CSS3** | Variables `:root`, Flexbox, Grid, animaciones `@keyframes`, media queries |
-| **JavaScript ES6+** | Lógica interactiva, DOM, `fetch`, `IntersectionObserver`, `requestAnimationFrame` |
+| **JavaScript (ES6+)** | Lógica interactiva, DOM, `fetch`, `IntersectionObserver`, `requestAnimationFrame` |
+| **Jira** | Gestión de proyecto - Metodología SCRUM |
 | **Figma** | Wireframes low-fi, moodboard, prototipo hi-fi interactivo |
-| **Formspree** | Backend del formulario de contacto (sin servidor propio) |
 | **Google Fonts** | Tipografías: Bebas Neue (display) + DM Sans (cuerpo) |
 | **Unsplash** | Imágenes de productos y categorías |
 | **GitHub** | Control de versiones y colaboración en equipo |
@@ -74,7 +76,6 @@ El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints ge
 ## ✨ Funcionalidades
 
 ### Interfaz
-- [x] Hero con imagen flotante animada y efecto parallax al hacer scroll
 - [x] Banda de texto animada (marquee infinito) con las categorías
 - [x] Sección de categorías con hover de zoom e imagen
 - [x] Sección de servicios con efecto de gradiente en hover
@@ -124,6 +125,21 @@ El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints ge
 - [x] Breakpoint 520px — productos en 1 columna, CTAs full width
 
 ---
+## 🧠 Arquitectura
+
+El proyecto sigue un enfoque modular basado en:
+
+- Estado global centralizado (`state`)
+- Render dinámico del DOM
+- Delegación de eventos
+- Separación por responsabilidades
+
+Patrones aplicados:
+- Event Delegation
+- Lazy Rendering
+- State-driven UI
+
+---
 
 ## 📁 Estructura del proyecto
 
@@ -132,7 +148,15 @@ fyka-sport/
 │
 ├── index.html          # Estructura HTML completa y semántica
 ├── styles.css          # Todos los estilos, variables y animaciones CSS
-├── app.js              # Toda la lógica JavaScript (13 módulos documentados)
+├── script.js              # Toda la lógica JavaScript (13 módulos documentados)
+├── images/             # Imágenes del README
+│   ├── Categorías.png
+│   ├── Contacto.png
+│   ├── Figma.png
+│   ├── Jira.png
+│   ├── Portada.png
+│   ├── Productos.png
+│   └── Servicios.png
 └── README.md           # Este archivo
 ```
 
@@ -142,7 +166,7 @@ fyka-sport/
 
 **`styles.css`** — Organizado en módulos con comentarios. Incluye las variables de diseño en `:root` (colores, tipografías, radios, sombras), estilos de todos los componentes, animaciones con `@keyframes` y los 4 breakpoints de media queries.
 
-**`app.js`** — Dividido en 19 secciones comentadas. Cada función tiene documentación JSDoc con descripción del flujo, parámetros y notas técnicas. No usa ningún framework ni librería externa.
+**`app.js`** — Dividido en 19 secciones comentadas. Cada función tiene documentación con descripción del flujo, parámetros y notas técnicas. No usa ningún framework ni librería externa.
 
 ---
 
@@ -154,7 +178,7 @@ No se requiere ninguna instalación. Solo necesitas un navegador web moderno.
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/TU_USUARIO/fyka-sport.git
+git clone https://github.com/FerZamu-byte/Landing_Page_room4
 
 # 2. Entrar a la carpeta
 cd fyka-sport
