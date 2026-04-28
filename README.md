@@ -32,9 +32,9 @@
 
 ## 🏪 Sobre el proyecto
 
-**FYKA SPORT** es una landing page interactiva para una tienda deportiva. El objetivo fue construir una plataforma online que presente productos y servicios de forma atractiva, intuitiva y completamente responsiva.
+**FYKA SPORT** es una landing page interactiva para una tienda deportiva. El objetivo fue construir una plataforma online que presente productos y servicios de forma atractiva, intuitiva y completamente responsiva. Enfocada en una sola oferta o acción, deshaciéndonos de más páginas y teniendo toda la información desplegada en una sóla hoja. A diferencia de una web normal, elimina distracciones para guiar al usuario hacia la conversión.
 
-El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints de una semana cada uno, partiendo desde wireframes en Figma hasta el producto final con JavaScript vanilla.
+El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints gestionados en Jira como parte de un hackaton académico de 24 hrs por parte de la CH66 de Generation - México, partiendo desde wireframes en Figma hasta el producto final con HTML, CSS y JS.
 
 ### Objetivos del proyecto
 
@@ -50,7 +50,7 @@ El proyecto fue desarrollado siguiendo la **metodología SCRUM** en 4 sprints de
 
 | Vista desktop | Vista móvil |
 |---|---|
-| ![Desktop](https://placehold.co/600x350/0a0a0a/c8f000?text=Desktop+View) | ![Mobile](https://placehold.co/280x500/0a0a0a/c8f000?text=Mobile+View) |
+| ![Desktop](images/Portada.png) | ![Mobile](images/PortadaMobil.png) |
 
 > Reemplaza estas imágenes con capturas reales del proyecto antes de entregar.
 
