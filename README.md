@@ -259,6 +259,6 @@ Este proyecto fue desarrollado con fines educativos para la materia de Desarroll
 
 <div align="center">
 
-Hecho con ⚡ por el equipo FYKA SPORT — 2025
+Hecho con ⚡ por el equipo FYKA SPORT — 2026
 
 </div>
